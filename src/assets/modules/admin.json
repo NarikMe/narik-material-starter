@@ -7,10 +7,11 @@
   "metaData": {
     "translateItems": ["admin"],
     "dataInfo": "$$dataInfo.dataInfo",
-    "uiDefaultOptions": ["$$uiDefaults.select","$$uiDefaults.data-table"],
-    "menuItems": [{
+    "uiDefaultOptions": ["$$uiDefaults.select", "$$uiDefaults.data-table"],
+    "menuItems": [
+      {
         "title": "mainPage",
-
+        "icon": "home-outline",
         "link": "../admin",
         "home": true
       },
@@ -20,9 +21,10 @@
       },
       {
         "title": "userAccount_-_role",
-
+        "icon": "people-outline",
         "link": "/pages/ui-features",
-        "children": [{
+        "children": [
+          {
             "title": "new_userAccount",
             "link": "userAccount"
           },
@@ -42,9 +44,11 @@
       }
     ],
     "dataItems": [],
-    "entities": [{
+    "entities": [
+      {
         "key": "userAccount",
-        "fields": [{
+        "fields": [
+          {
             "name": "userName",
             "required": true,
             "fieldType": "text"
@@ -73,7 +77,8 @@
       },
       {
         "key": "role",
-        "fields": [{
+        "fields": [
+          {
             "name": "title",
             "required": true,
             "fieldType": "text"
@@ -90,7 +95,8 @@
         }
       }
     ],
-    "views": [{
+    "views": [
+      {
         "key": "userAccount",
         "viewType": "Detail",
         "entity": "userAccount",
@@ -113,7 +119,8 @@
         "entity": "role"
       }
     ],
-    "toolbars": [{
+    "toolbars": [
+      {
         "key": "userDetailToolBar",
         "items": [
           "&&detailToolBar",
