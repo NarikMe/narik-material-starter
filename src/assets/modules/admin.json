@@ -7,7 +7,12 @@
   "metaData": {
     "translateItems": ["admin"],
     "dataInfo": "$$dataInfo.dataInfo",
-    "uiDefaultOptions": ["$$uiDefaults.select", "$$uiDefaults.data-table"],
+    "uiDefaultOptions": [
+      "$$uiDefaults.select",
+      "$$uiDefaults.data-table",
+      "$$uiDefaults.button",
+      "$$uiDefaults.toolbar"
+    ],
     "menuItems": [
       {
         "title": "mainPage",
