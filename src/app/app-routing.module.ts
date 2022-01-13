@@ -3,28 +3,29 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginViewComponent } from "./modules/main/login-view/login-view.component";
 import {
   UserIsAuthenticatedGuard,
-  UserIsAuthorizedGuard
+  UserIsAuthorizedGuard,
 } from "@narik/app-core";
 
 const routes: Routes = [
   {
     path: "",
-    component: LoginViewComponent
+    component: LoginViewComponent,
   },
   {
     path: "index",
-    component: LoginViewComponent
+    component: LoginViewComponent,
   },
   {
     path: "admin",
     data: { authorizeTag: ["1"] },
     canActivate: [UserIsAuthenticatedGuard, UserIsAuthorizedGuard],
-    loadChildren: "./modules/admin/admin.module#AdminModule"
-  }
+    loadChildren: () =>
+      import("./modules/admin/admin.module").then((m) => m.AdminModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
