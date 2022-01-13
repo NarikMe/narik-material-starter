@@ -1,31 +1,36 @@
-const AngularCompilerPlugin = require("@ngtools/webpack/src");
-const LayoutResolver = require("./build-tools/layout-resolver");
+const path = require('path');
+const AngularCompilerPlugin = require('@ngtools/webpack/src');
+const LayoutResolver = require('./build-tools/layout-resolver');
 
 module.exports = (config) => {
   const index = config.plugins.findIndex((p) => {
-    return p instanceof AngularCompilerPlugin.AngularCompilerPlugin;
+    return p instanceof AngularCompilerPlugin.AngularWebpackPlugin;
   });
-  const oldOptions = config.plugins[index]._options;
-  oldOptions.directTemplateLoading = false;
-  config.plugins.splice(index);
-
-  config.plugins.push(
-    new AngularCompilerPlugin.AngularCompilerPlugin(oldOptions)
+  const options = config.plugins[index].pluginOptions;
+  options.directTemplateLoading = false;
+  config.plugins.splice(
+    index,
+    1,
+    new AngularCompilerPlugin.AngularWebpackPlugin(options)
   );
-
-  config.module.rules.unshift({
-    test: /\.html?$/,
-    use: [
-      "raw-loader",
-      {
-        loader: "@narik/webpack-tools",
-        options: {
-          resolver: new LayoutResolver(),
-          basePath: config.plugins[index]._basePath,
+  config.module.rules.unshift(
+    {
+      test: /\.html$/i,
+      use: [
+        {
+          loader: '@narik/webpack-tools',
+          options: {
+            resolver: new LayoutResolver(),
+            basePath: path.dirname(options.tsconfig),
+          },
         },
-      },
-    ],
-  });
+      ],
+    },
+    {
+      test: /\.html$/i,
+      type: 'asset/source',
+    }
+  );
 
   return config;
 };
